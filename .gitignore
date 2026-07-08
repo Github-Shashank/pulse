@@ -1,0 +1,46 @@
+# Build output
+
+pulse
+*.o
+*.a
+*.so
+*.out
+
+# Temporary files
+
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Logs
+
+*.log
+
+# Core dumps
+
+core
+core.*
+
+# Generated directories
+
+build/
+bin/
+
+# Temporary directories
+
+temp/
+tmp/
+
+# VS Code
+
+.vscode/
+
+# CLion
+
+.idea/
+
+# Backup files
+
+*.bak
