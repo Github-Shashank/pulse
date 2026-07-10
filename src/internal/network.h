@@ -5,4 +5,6 @@
 
 int network_detect(PulseState *state);
 
+int network_get_ipv4(PulseState *state);
+
 #endif

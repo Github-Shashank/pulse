@@ -17,14 +17,17 @@ void ui_draw(const PulseState *state)
 {
     clear();
 
-    mvprintw(0, 0, "Pulse");
-    mvprintw(2, 0,
-         "Interface : %s\nStatus    : %s",
-         state->connected ? state->interface : "--",
-         state->connected ? "Connected" : "Disconnected");
-
     if (state->initialized)
-        mvprintw(4, 0, "Core initialized");
+    {
+    mvprintw(0, 0, "Pulse");
+    mvprintw(2, 0, "Interface : %s", state->connected ? state->interface : "--");
+    mvprintw(3, 0, "Status    : %s", state->connected ? "Connected" : "Disconnected");
+    mvprintw(4, 0, "IPv4      : %s", state->connected ? state->ipv4 : "--");
+    mvprintw(6, 0, "Press q to quit");
+    }
+
+//    if (state->initialized)
+//        mvprintw(4, 0, "Core initialized");
 
     mvprintw(6, 0, "Press q to quit");
 
