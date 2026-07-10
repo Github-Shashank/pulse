@@ -18,7 +18,10 @@ void ui_draw(const PulseState *state)
     clear();
 
     mvprintw(0, 0, "Pulse");
-    mvprintw(2, 0, "Initializing...");
+    mvprintw(2, 0,
+         "Interface : %s\nStatus    : %s",
+         state->connected ? state->interface : "--",
+         state->connected ? "Connected" : "Disconnected");
 
     if (state->initialized)
         mvprintw(4, 0, "Core initialized");

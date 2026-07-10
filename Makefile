@@ -5,6 +5,7 @@ CFLAGS = -std=c11 -Wall -Wextra -Werror -Iinclude -Isrc/internal
 SRC = \
 src/main.c \
 src/core/pulse.c \
+src/core/network.c \
 src/ui/ui.c
 
 OBJ = $(SRC:.c=.o)
