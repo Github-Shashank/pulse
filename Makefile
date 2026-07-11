@@ -6,7 +6,8 @@ SRC = \
 src/main.c \
 src/core/pulse.c \
 src/core/network.c \
-src/ui/ui.c
+src/ui/ui.c \
+src/core/wifi.c
 
 OBJ = $(SRC:.c=.o)
 
