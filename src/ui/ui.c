@@ -50,22 +50,24 @@ void ui_draw(const PulseState *state)
     if (state->initialized)
     {
     mvprintw(0, 0, "Pulse");
+
     mvprintw(2, 0, "Interface : %s", state->connected ? state->interface : "--");
     mvprintw(3, 0, "Status    : %s", state->connected ? "Connected" : "Disconnected");
     mvprintw(4, 0, "IPv4      : %s", state->connected ? state->ipv4 : "--");
-    mvprintw(6, 0, "SSID      : %s", state->connected ? state->ssid : "--");
+    mvprintw(5, 0, "Gateway   : %s", state->connected ? state->gateway : "--");
+
+    mvprintw(7, 0, "SSID      : %s", state->connected ? state->ssid : "--");
+
     char bar[11];
-
     signal_bar(state->signal_dbm, bar);
-
     mvprintw(
-        7,
+        8,
         0,
         "Signal    : [%s] %d dBm",
         bar,
         state->signal_dbm
     );
-    mvprintw(9, 0, "Press q to quit");
+    mvprintw(10, 0, "Press q to quit");
     }
 
 //    if (state->initialized)

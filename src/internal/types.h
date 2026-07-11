@@ -8,6 +8,8 @@
 
 #define PULSE_SSID_LEN 64
 
+#define PULSE_GATEWAY_LEN 16
+
 typedef struct
 {
     int initialized;
@@ -15,8 +17,10 @@ typedef struct
 
     char interface[PULSE_IFNAME_LEN];
     char ipv4[PULSE_IP_LEN];
+    char gateway[PULSE_GATEWAY_LEN];
 
     char ssid[PULSE_SSID_LEN];
+
     int signal_dbm;
 } PulseState;
 
