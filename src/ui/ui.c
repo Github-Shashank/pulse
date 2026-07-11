@@ -92,7 +92,7 @@ static void signal_bar(int dbm, char *bar)
 
     for (i = 0; i < 10; i++)
     {
-        bar[i] = (i < blocks) ?  '#' : '.' ; // '█' : '░';
+        bar[i] = (i < blocks) ?  '#' : '.' ; 
     }
 
     bar[10] = '\0';
@@ -112,6 +112,7 @@ void ui_draw(const PulseState *state)
     mvprintw(5, 0, "Gateway   : %s", state->connected ? state->gateway : "--");
 
     mvprintw(7, 0, "SSID      : %s", state->connected ? state->ssid : "--");
+
     char bar[11];
     signal_bar(state->signal_dbm, bar);
     mvprintw(8, 0, "Signal    : [%s] %d dBm", bar, state->signal_dbm);
@@ -136,11 +137,6 @@ void ui_draw(const PulseState *state)
     mvprintw(15, 0, "Press q to quit");
 
     }
-
-//    if (state->initialized)
-//        mvprintw(4, 0, "Core initialized");
-
-//    mvprintw(6, 0, "Press q to quit");
 
     refresh();
 }
