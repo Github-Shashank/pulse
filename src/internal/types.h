@@ -25,6 +25,11 @@ typedef struct
 
     unsigned long long rx_bytes;
     unsigned long long tx_bytes;
+
+    double down_speed;
+    double up_speed;
+
+    double ping_ms;
 } PulseState;
 
 #endif

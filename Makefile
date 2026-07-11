@@ -8,7 +8,8 @@ src/core/pulse.c \
 src/core/network.c \
 src/ui/ui.c \
 src/core/wifi.c \
-src/core/traffic.c
+src/core/traffic.c \
+src/core/ping.c
 
 OBJ = $(SRC:.c=.o)
 

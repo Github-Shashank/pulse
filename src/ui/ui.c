@@ -2,6 +2,30 @@
 
 #include "../internal/ui.h"
 
+static void format_speed(double bytes_per_second,
+                         char *buffer,
+                         size_t size)
+{
+    if (bytes_per_second < 1024.0)
+    {
+        snprintf(buffer, size, "%.0f B/s", bytes_per_second);
+    }
+    else if (bytes_per_second < 1024.0 * 1024.0)
+    {
+        snprintf(buffer,
+                 size,
+                 "%.1f KB/s",
+                 bytes_per_second / 1024.0);
+    }
+    else
+    {
+        snprintf(buffer,
+                 size,
+                 "%.1f MB/s",
+                 bytes_per_second / (1024.0 * 1024.0));
+    }
+}
+
 int ui_init(void)
 {
     initscr();
@@ -95,13 +119,21 @@ void ui_draw(const PulseState *state)
     char rx[32];
     char tx[32];
 
+    char down[32];
+    char up[32];
+
     format_bytes(state->rx_bytes, rx, sizeof(rx));
     format_bytes(state->tx_bytes, tx, sizeof(tx));
 
-    mvprintw(10, 0, "RX        : %s", rx);
-    mvprintw(11, 0, "TX        : %s", tx);
+    format_speed(state->down_speed, down, sizeof(down));
+    format_speed(state->up_speed, up, sizeof(up));
+    
+    mvprintw(10, 0, "RX        : %-10s Down : %s", rx, down);
+    mvprintw(11, 0, "TX        : %-10s Up   : %s", tx, up);
 
-    mvprintw(13, 0, "Press q to quit");
+    mvprintw(13, 0, "Ping      : %.2f ms", state->ping_ms);
+
+    mvprintw(15, 0, "Press q to quit");
 
     }
 
