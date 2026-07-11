@@ -13,6 +13,37 @@ int ui_init(void)
     return 0;
 }
 
+static void format_bytes(
+    unsigned long long bytes,
+    char *buffer,
+    size_t size)
+{
+    if (bytes < 1024)
+    {
+        snprintf(buffer, size, "%llu B", bytes);
+    }
+    else if (bytes < 1024ULL * 1024)
+    {
+        snprintf(buffer,
+                 size,
+                 "%.1f KB",
+                 bytes / 1024.0);
+    }
+    else if (bytes < 1024ULL * 1024 * 1024)
+    {
+        snprintf(buffer,
+                 size,
+                 "%.1f MB",
+                 bytes / (1024.0 * 1024.0));
+    }
+    else
+    {
+        snprintf(buffer,
+                 size,
+                 "%.1f GB",
+                 bytes / (1024.0 * 1024.0 * 1024.0));
+    }
+}
 
 static void signal_bar(int dbm, char *bar)
 {
@@ -57,17 +88,21 @@ void ui_draw(const PulseState *state)
     mvprintw(5, 0, "Gateway   : %s", state->connected ? state->gateway : "--");
 
     mvprintw(7, 0, "SSID      : %s", state->connected ? state->ssid : "--");
-
     char bar[11];
     signal_bar(state->signal_dbm, bar);
-    mvprintw(
-        8,
-        0,
-        "Signal    : [%s] %d dBm",
-        bar,
-        state->signal_dbm
-    );
-    mvprintw(10, 0, "Press q to quit");
+    mvprintw(8, 0, "Signal    : [%s] %d dBm", bar, state->signal_dbm);
+
+    char rx[32];
+    char tx[32];
+
+    format_bytes(state->rx_bytes, rx, sizeof(rx));
+    format_bytes(state->tx_bytes, tx, sizeof(tx));
+
+    mvprintw(10, 0, "RX        : %s", rx);
+    mvprintw(11, 0, "TX        : %s", tx);
+
+    mvprintw(13, 0, "Press q to quit");
+
     }
 
 //    if (state->initialized)

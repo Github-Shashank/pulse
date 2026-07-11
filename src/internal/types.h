@@ -22,6 +22,9 @@ typedef struct
     char ssid[PULSE_SSID_LEN];
 
     int signal_dbm;
+
+    unsigned long long rx_bytes;
+    unsigned long long tx_bytes;
 } PulseState;
 
 #endif
